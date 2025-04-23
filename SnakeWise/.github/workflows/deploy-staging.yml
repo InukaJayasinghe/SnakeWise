@@ -1,0 +1,19 @@
+name: Staging Deployment
+
+on:
+  push:
+    branches:
+      - staging  # Trigger this on push to staging branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Staging
+        run: |
+          echo "Deploying to Staging Environment"
+          # Add your deployment command here (e.g., using AWS, Netlify, etc.)
