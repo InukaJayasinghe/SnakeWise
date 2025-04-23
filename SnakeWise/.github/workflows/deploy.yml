@@ -1,0 +1,33 @@
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main  # For production
+      - staging  # For staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy to Staging (if on staging branch)
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          # Deploy to staging (you can use AWS, Netlify, Vercel, etc.)
+
+      - name: Deploy to Production (if on main branch)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Deploy to production
